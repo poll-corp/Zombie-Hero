@@ -9,9 +9,10 @@ public class zombie_move : MonoBehaviour
 
 		void Update ()
 		{
-				transform.position = Vector2.MoveTowards (transform.position, target.position, speed * Time.deltaTime);
-			Debug.Log (target.position);
-			Debug.Log (transform.position);
+				if(target != null)
+					transform.position = Vector2.MoveTowards (transform.position, target.position, speed * Time.deltaTime);
+				//Debug.Log (target.position);
+				//Debug.Log (transform.position);
 		}
 		
 		void FixedUpdate ()
@@ -19,4 +20,18 @@ public class zombie_move : MonoBehaviour
 				// Apply movement to the rigidbody
 //				rigidbody2D.velocity = movement;
 		}
+
+		void OnCollisionEnter2D (Collision2D coll)
+		{
+		if (coll.gameObject.tag == "hero") {
+						Debug.Log ("zombie hit hero");	
+						//Destroy(coll.gameObject);//Destry hero
+						//Tam thoi xoa zombie di cho gon
+					Destroy(gameObject);
+				} else {
+						//Debug.Log ("other collison");	
+				}
+		
+		}
+
 }
